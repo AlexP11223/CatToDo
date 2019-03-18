@@ -1,6 +1,9 @@
 .idea
 .vagrant
 
+/public/css
+/public/js
+
 /node_modules
 /public/hot
 /public/storage
