@@ -12,5 +12,6 @@ For development you can use Homestead virtual machine (via Vagrant) instead of m
          - cattodo
          - cattodo-test
      ```
- 4. Run `vagrant up`, this should download, configure and launch the virtual machine. Follow Laravel Homestead and Vagrant documentation if it fails.
- 5. Use any SSH client (such as Putty on Windows) and private key (should be in **.vagrant/machines/default/virtualbox** by default, or check vagrant output) to connect into it.
+ 4. Run `vagrant up`, this should download, configure and launch the virtual machine. Follow Laravel Homestead and Vagrant documentation if it fails. On Windows you may need to run it from admin cmd to avoid issues with symlinks (e.g. when installing npm packages).
+ 5. Use `vagrant ssh` to connect into it.
+ 6. Run `make install` from the project dir in Vagrant (`cd code` by default) to install packages and migrations, build frontend.
