@@ -1,3 +1,7 @@
+env:
+	cp .env.example .env
+	php artisan key:generate
+
 install:
 	composer install
 	npm ci
