@@ -16,3 +16,8 @@ clean-frontend:
 	rm -f public/mix-manifest.json
 
 clean: clean-php clean-node clean-frontend
+
+ide-helper:
+	php artisan clear-compiled
+	php artisan ide-helper:generate
+	php artisan ide-helper:meta
