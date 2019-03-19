@@ -64,6 +64,12 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group row mb-0 pt-4">
+                            <div class="col-md-6 offset-md-4">
+                                <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
