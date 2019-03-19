@@ -17,6 +17,12 @@ clean-frontend:
 
 clean: clean-php clean-node clean-frontend
 
+clean-db:
+	php artisan migrate:fresh
+
+repl:
+	php artisan tinker
+
 ide-helper:
 	php artisan clear-compiled
 	php artisan ide-helper:generate
