@@ -8,6 +8,9 @@ install:
 	npm run dev
 	php artisan migrate
 
+test:
+	composer run-script phpunit
+
 clean-php:
 	rm -rf vendor
 
