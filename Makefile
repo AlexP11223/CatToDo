@@ -34,3 +34,6 @@ ide-helper:
 	php artisan clear-compiled
 	php artisan ide-helper:generate
 	php artisan ide-helper:meta
+
+ide-helper-models:
+	php artisan ide-helper:models --write
