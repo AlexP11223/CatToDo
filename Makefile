@@ -11,6 +11,12 @@ install:
 test:
 	composer run-script phpunit
 
+watch:
+	npm run watch-poll
+
+frontend:
+	npm run dev
+
 clean-php:
 	rm -rf vendor
 

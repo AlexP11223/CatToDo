@@ -26,7 +26,7 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 🐱 {{ config('app.name') }}
             </a>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <!-- Authentication Links -->
                 @auth
                     <li class="nav-item dropdown">
