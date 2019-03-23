@@ -11,24 +11,9 @@
                         <span class="navbar-toggler-icon"></span> <span>Main</span>
                     </button>
                     <div class="categories-list list-group collapse navbar-collapse" id="categoriesList">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Link
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Link 1
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action active">
-                            Link
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Link
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Link
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Link
-                        </a>
+                        @foreach($categories as $category)
+                            <a href="#" class="list-group-item list-group-item-action">{{ $category->name }}</a>
+                        @endforeach
                     </div>
                 </nav>
             </aside>

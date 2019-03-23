@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -18,7 +19,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('tasks.index');
+        $user = Auth::user();
+        $categories = $user->taskCategories()->get();
+
+        return view('tasks.index', ['categories' => $categories]);
     }
 
     /**

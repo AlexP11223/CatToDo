@@ -57,4 +57,12 @@ class User extends Authenticatable
     protected $dispatchesEvents = [
         'created' => UserCreated::class
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function taskCategories()
+    {
+        return $this->hasMany(Category::class)->orderBy('order');
+    }
 }
