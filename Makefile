@@ -7,6 +7,7 @@ install:
 	npm ci
 	npm run dev
 	php artisan migrate
+	php artisan db:seed
 
 test:
 	composer run-script phpunit
