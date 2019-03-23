@@ -33,6 +33,7 @@ clean: clean-php clean-node clean-frontend
 
 clean-db:
 	php artisan migrate:fresh
+	php artisan db:seed
 
 repl:
 	php artisan tinker
