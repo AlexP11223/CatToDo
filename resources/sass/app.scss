@@ -18,6 +18,10 @@
     text-align: left;
 }
 
+.categories-list {
+    width: 100%;
+}
+
 .categories-list-toggler span {
     color: #000;
     font-size: 1.8rem;
@@ -42,8 +46,7 @@
 }
 
 .todo-checkbox {
-    padding: 0.75rem 1.25rem;
-    padding-right: 0;
+    padding: 0.75rem 0 0.75rem 1.25rem;
 }
 
 .todo-checkbox:hover {

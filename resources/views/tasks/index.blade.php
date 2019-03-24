@@ -10,15 +10,17 @@
                             aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span> <span>{{ $selectedCategory->name }}</span>
                     </button>
-                    <div class="categories-list list-group collapse navbar-collapse" id="categoriesList">
-                        @foreach($categories as $category)
-                            <a href="{{ route('category', ['categoryName' => $category->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                {{ $category->name }}
-                                @if ($category->tasks->count())
-                                    <span class="badge badge-pill">{{ $category->tasks->count() }}</span>
-                                @endif
-                            </a>
-                        @endforeach
+                    <div class="collapse navbar-collapse" id="categoriesList">
+                        <div class="categories-list list-group">
+                            @foreach($categories as $category)
+                                <a href="{{ route('category', ['categoryName' => $category->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    {{ $category->name }}
+                                    @if ($category->tasks->count())
+                                        <span class="badge badge-pill">{{ $category->tasks->count() }}</span>
+                                    @endif
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
                 </nav>
             </aside>
