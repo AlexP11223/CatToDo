@@ -15,7 +15,7 @@ class UserCreated
      */
     public function handle(UserCreatedEvent $event)
     {
-        $categoryNames = ['Work', 'Home', 'Study', 'Other'];
+        $categoryNames = ['Work', 'Home', 'Study', 'Books to Read', 'Movies to Watch'];
 
         $i = 1;
         foreach ($categoryNames as $name) {

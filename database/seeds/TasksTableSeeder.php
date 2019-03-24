@@ -22,15 +22,19 @@ class TasksTableSeeder extends Seeder
 
         Task::firstOrCreate([
             'description' => 'Learn how to code',
+            'user_id' => $user->id,
             'category_id' => $categoryNameIdMap['Study']]);
         Task::firstOrCreate([
             'description' => 'Install Linux',
+            'user_id' => $user->id,
             'category_id' => $categoryNameIdMap['Study']]);
         Task::firstOrCreate([
             'description' => 'Buy milk',
+            'user_id' => $user->id,
             'category_id' => $categoryNameIdMap['Home']]);
         Task::firstOrCreate([
             'description' => 'Ask for a pay rise',
+            'user_id' => $user->id,
             'category_id' => $categoryNameIdMap['Work']]);
     }
 }

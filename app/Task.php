@@ -27,6 +27,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $user_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Task whereUserId($value)
  */
 class Task extends Model
 {
