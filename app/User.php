@@ -62,6 +62,14 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class)->orderBy('id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function taskCategories()
     {
         return $this->hasMany(Category::class)->orderBy('order');

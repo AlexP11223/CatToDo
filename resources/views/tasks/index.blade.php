@@ -20,30 +20,19 @@
             <main class="col-md-9 py-3">
                 <h2 class="d-none d-md-block">Main</h2>
                 <div class="todo-list list-group">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex align-items-center">
-                            <div class="todo-checkbox align-self-stretch d-flex align-items-center">
-                                <div class="custom-control-lg custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1"></label>
+                    @foreach ($tasks as $task)
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex align-items-center">
+                                <div class="todo-checkbox align-self-stretch d-flex align-items-center">
+                                    <div class="custom-control-lg custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" class="custom-control-input" id="taskCheckbox{{ $loop->iteration }}">
+                                        <label class="custom-control-label" for="taskCheckbox{{ $loop->iteration }}"></label>
+                                    </div>
                                 </div>
+                                <span>{{ $task->description }}</span>
                             </div>
-                            <span>Link</span>
-
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex align-items-center">
-                            <div class="todo-checkbox align-self-stretch d-flex align-items-center">
-                                <div class="custom-control-lg custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label" for="customCheck2"></label>
-                                </div>
-                            </div>
-                            <span>Link ssssssssssss      xxxxxxxxxxxxs    fc           s    89c9c      ssssssssss sssssssssssssssssssss s              rrrrrrrrr      sssss sssssssssss fsssssssss</span>
-
-                        </div>
-                    </a>
+                        </a>
+                    @endforeach
                 </div>
             </main>
         </div>

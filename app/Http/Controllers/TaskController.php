@@ -20,9 +20,10 @@ class TaskController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $tasks = $user->tasks()->get();
         $categories = $user->taskCategories()->get();
 
-        return view('tasks.index', ['categories' => $categories]);
+        return view('tasks.index', ['tasks' => $tasks, 'categories' => $categories]);
     }
 
     /**
