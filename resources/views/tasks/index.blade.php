@@ -8,11 +8,11 @@
                     <button class="navbar-toggler categories-list-toggler" type="button" data-toggle="collapse"
                             data-target="#categoriesList" aria-controls="categoriesList" aria-expanded="false"
                             aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span> <span>Main</span>
+                        <span class="navbar-toggler-icon"></span> <span>{{ $selectedCategory->name }}</span>
                     </button>
                     <div class="categories-list list-group collapse navbar-collapse" id="categoriesList">
                         @foreach($categories as $category)
-                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <a href="{{ route('category', ['categoryName' => $category->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 {{ $category->name }}
                                 @if ($category->tasks->count())
                                     <span class="badge badge-pill">{{ $category->tasks->count() }}</span>
@@ -23,7 +23,7 @@
                 </nav>
             </aside>
             <main class="col-md-9 py-3">
-                <h2 class="d-none d-md-block">Main</h2>
+                <h2 class="d-none d-md-block">{{ $selectedCategory->name }}</h2>
                 <div class="todo-list list-group">
                     @foreach ($tasks as $task)
                         <a href="#" class="list-group-item list-group-item-action">
@@ -35,7 +35,9 @@
                                     </div>
                                 </div>
                                 <span>{{ $task->description }}</span>
-                                <span class="badge ml-auto">{{ $task->category->name }}</span>
+                                @if ($selectedCategory->name === 'All')
+                                    <span class="badge ml-auto">{{ $task->category->name }}</span>
+                                @endif
                             </div>
                         </a>
                     @endforeach

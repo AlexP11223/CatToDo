@@ -16,3 +16,4 @@ Auth::routes();
 Route::get('/', 'TaskController@index');
 
 Route::resource('todo', 'TaskController');
+Route::get('todo/categories/{categoryName?}', 'TaskController@index')->name('category');
