@@ -42,4 +42,12 @@ class Task extends Model
     protected $fillable = [
         'description', 'completed'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class)->orderBy('id');
+    }
 }

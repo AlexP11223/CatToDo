@@ -12,7 +12,12 @@
                     </button>
                     <div class="categories-list list-group collapse navbar-collapse" id="categoriesList">
                         @foreach($categories as $category)
-                            <a href="#" class="list-group-item list-group-item-action">{{ $category->name }}</a>
+                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                {{ $category->name }}
+                                @if ($category->tasks->count())
+                                    <span class="badge badge-pill">{{ $category->tasks->count() }}</span>
+                                @endif
+                            </a>
                         @endforeach
                     </div>
                 </nav>
@@ -30,6 +35,7 @@
                                     </div>
                                 </div>
                                 <span>{{ $task->description }}</span>
+                                <span class="badge ml-auto">{{ $task->category->name }}</span>
                             </div>
                         </a>
                     @endforeach
