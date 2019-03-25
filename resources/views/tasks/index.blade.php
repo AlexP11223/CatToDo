@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                                 <span class="todo-item-text">{{ $task->description }}</span>
-                                @if ($selectedCategory->name === 'All')
+                                @if ($task->category && $selectedCategory->name === 'All')
                                     <span class="badge ml-auto">{{ $task->category->name }}</span>
                                 @endif
                             </div>
