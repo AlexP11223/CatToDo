@@ -57,6 +57,72 @@ class TaskTest extends TestCase
 
     /** @test
      */
+    public function user_can_add_task()
+    {
+        $this
+            ->actingAs($this->user())
+            ->get('/')
+            ->assertOk();
+
+        $this
+            ->post("tasks", ['description' => 'Setup backup'])
+            ->assertRedirect('/')
+            ->assertSessionHasNoErrors();
+
+        $this
+            ->get('/')
+            ->assertOk()
+            ->assertSeeText('Setup backup');
+    }
+
+    /** @test
+     */
+    public function user_can_add_task_to_category()
+    {
+        $categoryName = 'Books to Read';
+        $categoryId = $this->user()->taskCategories()->where('name', $categoryName)->first()->id;
+        $categoryUrl = route('category', ['categoryName' => $categoryName]);
+
+        $this
+            ->actingAs($this->user())
+            ->get($categoryUrl)
+            ->assertOk();
+
+        $this
+            ->post("tasks", ['description' => 'Read SICP', 'categoryId' => $categoryId])
+            ->assertRedirect($categoryUrl)
+            ->assertSessionHasNoErrors();
+
+        $this
+            ->get($categoryUrl)
+            ->assertOk()
+            ->assertSeeText('Read SICP');
+        $this
+            ->get('/')
+            ->assertOk()
+            ->assertSeeText('Read SICP');
+    }
+
+    /** @test
+     */
+    public function user_cannot_add_task_to_other_user_category()
+    {
+        $categoryName = 'Books to Read';
+        $categoryId = $this->user()->taskCategories()->where('name', $categoryName)->first()->id;
+        $categoryUrl = route('category', ['categoryName' => $categoryName]);
+
+        $this
+            ->actingAs($this->user2())
+            ->get($categoryUrl)
+            ->assertOk();
+
+        $this
+            ->post("tasks", ['description' => 'Read SICP', 'categoryId' => $categoryId])
+            ->assertNotFound();
+    }
+
+    /** @test
+     */
     public function user_can_edit_task()
     {
         $this

@@ -28,6 +28,9 @@
                 <h2 class="d-none d-md-block">{{ $selectedCategory->name }}</h2>
                 <form action="{{action('TaskController@store')}}" method="post">
                     @csrf
+                    @if ($selectedCategory->name !== 'All')
+                        <input type="hidden" name="categoryId" value="{{ $selectedCategory->id }}">
+                    @endif
                     <div class="form-group ">
                         <div>
                             <input type="text" class="form-control" name="description" required>

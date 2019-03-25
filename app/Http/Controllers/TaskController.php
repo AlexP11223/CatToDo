@@ -55,18 +55,23 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $task = new Task();
+        $task->description = $request['description'];
+        $task->user_id = Auth::user()->id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $categoryId = $request['categoryId'];
+        if ($categoryId) {
+            /** @var Category $category */
+            $category = Auth::user()->taskCategories()->find($categoryId);
+            if (!$category) {
+                abort(404);
+            }
+            $task->category_id = $category->id;
+        }
+
+        $task->save();
+
+        return redirect()->back();
     }
 
     /**
