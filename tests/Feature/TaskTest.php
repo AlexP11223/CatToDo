@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Task;
 use Tests\TestCase;
 
 class TaskTest extends TestCase
@@ -48,10 +49,51 @@ class TaskTest extends TestCase
             ->assertDontSeeText(self::studyTask1)
             ->assertDontSeeText(self::studyTask2);
         $this
-            ->actingAs($this->user2())
             ->get(route('category', ['categoryName' => 'Study']))
             ->assertOk()
             ->assertDontSeeText(self::studyTask1)
             ->assertDontSeeText(self::studyTask2);
+    }
+
+    /** @test
+     */
+    public function user_can_edit_task()
+    {
+        $this
+            ->actingAs($this->user())
+            ->get('/')
+            ->assertOk()
+            ->assertSeeText(self::studyTask1)
+            ->assertSeeText(self::studyTask2);
+
+        $taskId = Task::whereDescription(self::studyTask2)->first()->id;
+
+        $this
+            ->put("tasks/$taskId", ['description' => 'Install MacOS'])
+            ->assertRedirect('/')
+            ->assertSessionHasNoErrors();
+
+        $this
+            ->get('/')
+            ->assertOk()
+            ->assertDontSeeText(self::studyTask2)
+            ->assertSeeText(self::studyTask1)
+            ->assertSeeText('Install MacOS');
+    }
+
+    /** @test
+     */
+    public function user_cannot_edit_other_user_task()
+    {
+        $this
+            ->actingAs($this->user2())
+            ->get('/')
+            ->assertOk();
+
+        $taskId = Task::whereDescription(self::studyTask2)->first()->id;
+
+        $this
+            ->put("tasks/$taskId", ['description' => 'Install MacOS'])
+            ->assertNotFound();
     }
 }

@@ -28,7 +28,7 @@
                 <h2 class="d-none d-md-block">{{ $selectedCategory->name }}</h2>
                 <div class="todo-list list-group">
                     @foreach ($tasks as $task)
-                        <a href="#" class="list-group-item list-group-item-action">
+                        <a href="#" class="todo-item list-group-item list-group-item-action">
                             <div class="d-flex align-items-center">
                                 <div class="todo-checkbox align-self-stretch d-flex align-items-center">
                                     <div class="custom-control-lg custom-control custom-checkbox custom-control-inline">
@@ -36,10 +36,29 @@
                                         <label class="custom-control-label" for="taskCheckbox{{ $loop->iteration }}"></label>
                                     </div>
                                 </div>
-                                <span>{{ $task->description }}</span>
+                                <span class="todo-item-text">{{ $task->description }}</span>
                                 @if ($selectedCategory->name === 'All')
                                     <span class="badge ml-auto">{{ $task->category->name }}</span>
                                 @endif
+                            </div>
+                            <div class="todo-item-form" style="display: none">
+                                <form action="{{action('TaskController@update', ['task' => $task->id])}}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <div class="form-group">
+                                        <div>
+                                            <input type="text" class="form-control" name="description" value="{{ $task->description }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-primary btn-block">
+                                                {{ __('Save') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </a>
                     @endforeach
