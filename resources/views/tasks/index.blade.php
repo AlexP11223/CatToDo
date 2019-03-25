@@ -26,6 +26,24 @@
             </aside>
             <main class="col-md-9 py-3">
                 <h2 class="d-none d-md-block">{{ $selectedCategory->name }}</h2>
+                <form action="{{action('TaskController@store')}}" method="post">
+                    @csrf
+                    <div class="form-group ">
+                        <div>
+                            <input type="text" class="form-control" name="description" required>
+                        </div>
+                        <div class="row d-flex pt-2">
+                            <div class="col-md-3 ml-auto">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    {{ __('Add Task') }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                    </div>
+                </form>
                 <div class="todo-list list-group">
                     @foreach ($tasks as $task)
                         <a href="#" class="todo-item list-group-item list-group-item-action">
@@ -49,13 +67,12 @@
                                         <div>
                                             <input type="text" class="form-control" name="description" value="{{ $task->description }}" required>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group row d-flex">
-                                        <div class="col-md-3 ml-auto">
-                                            <button type="submit" class="btn btn-primary btn-block">
-                                                {{ __('Save') }}
-                                            </button>
+                                        <div class="row d-flex pt-2">
+                                            <div class="col-md-3 ml-auto">
+                                                <button type="submit" class="btn btn-primary btn-block">
+                                                    {{ __('Save') }}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
