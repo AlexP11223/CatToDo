@@ -14,7 +14,7 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::find(1);
+        $user = User::whereName('user')->first();
         $categories = $user->taskCategories()->get();
         $categoryNameIdMap = $categories->mapWithKeys(function (Category $category) {
             return [$category->name => $category->id];
