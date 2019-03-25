@@ -51,8 +51,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
+                                    <div class="form-group row d-flex">
+                                        <div class="col-md-3 ml-auto">
                                             <button type="submit" class="btn btn-primary btn-block">
                                                 {{ __('Save') }}
                                             </button>
@@ -62,8 +62,8 @@
                                 <form class="pt-4" action="{{action('TaskController@destroy', ['task' => $task->id])}}" method="post">
                                     @method('DELETE')
                                     @csrf
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
+                                    <div class="form-group row d-flex">
+                                        <div class="col-md-3 ml-auto">
                                             <button type="submit" class="btn btn-danger btn-block">
                                                 {{ __('Delete') }}
                                             </button>
