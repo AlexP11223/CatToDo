@@ -96,4 +96,45 @@ class TaskTest extends TestCase
             ->put("tasks/$taskId", ['description' => 'Install MacOS'])
             ->assertNotFound();
     }
+
+    /** @test
+     */
+    public function user_can_delete_task()
+    {
+        $this
+            ->actingAs($this->user())
+            ->get('/')
+            ->assertOk()
+            ->assertSeeText(self::studyTask1)
+            ->assertSeeText(self::studyTask2);
+
+        $taskId = Task::whereDescription(self::studyTask2)->first()->id;
+
+        $this
+            ->delete("tasks/$taskId")
+            ->assertRedirect('/')
+            ->assertSessionHasNoErrors();
+
+        $this
+            ->get('/')
+            ->assertOk()
+            ->assertDontSeeText(self::studyTask2)
+            ->assertSeeText(self::studyTask1);
+    }
+
+    /** @test
+     */
+    public function user_cannot_delete_other_user_task()
+    {
+        $this
+            ->actingAs($this->user2())
+            ->get('/')
+            ->assertOk();
+
+        $taskId = Task::whereDescription(self::studyTask2)->first()->id;
+
+        $this
+            ->delete("tasks/$taskId")
+            ->assertNotFound();
+    }
 }

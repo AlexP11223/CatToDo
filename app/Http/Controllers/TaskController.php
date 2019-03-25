@@ -92,11 +92,18 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Task $task
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        if ($task->user_id !== Auth::user()->id) {
+            abort(404);
+        }
+
+        $task->delete();
+
+        return redirect()->back();
     }
 }

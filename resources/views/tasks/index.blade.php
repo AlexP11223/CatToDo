@@ -59,6 +59,17 @@
                                         </div>
                                     </div>
                                 </form>
+                                <form class="pt-4" action="{{action('TaskController@destroy', ['task' => $task->id])}}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-danger btn-block">
+                                                {{ __('Delete') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </a>
                     @endforeach
