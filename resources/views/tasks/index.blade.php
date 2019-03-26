@@ -72,7 +72,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     <img class="img-fluid cat-img" src="{{ url('img/ajax-loader.gif') }}" alt="cat image"/>
                 </div>
                 <div class="modal-footer">
