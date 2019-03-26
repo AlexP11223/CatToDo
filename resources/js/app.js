@@ -7,7 +7,11 @@ function toggleCompletion(taskItem) {
 
     chk.prop('checked', !isChecked);
 
-    axios.put(route('task_toggle', {task: id}));
+    axios.put(route('task_toggle', {task: id})).then(() => {
+        if (isChecked) {
+            window.location.reload();
+        }
+    });
 
     if (!isChecked) {
         const dlg = $('#taskCompletedDialog');
@@ -39,8 +43,6 @@ function toggleCompletion(taskItem) {
 
             window.location.reload();
         });
-    } else {
-        window.location.reload();
     }
 }
 
