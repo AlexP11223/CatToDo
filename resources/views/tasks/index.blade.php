@@ -73,10 +73,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img class="img-fluid" src="https://cdn2.thecatapi.com/images/MTg4MDU1Ng.jpg" alt="cat image"/>
+                    <img class="img-fluid cat-img" src="{{ url('img/ajax-loader.gif') }}" alt="cat image"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Continue (<span class="dialog-close-counter">15</span>)</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Continue <span class="dialog-close-counter" style="display: none">(<span class="dialog-close-counter-value">15</span>)</span></button>
                 </div>
             </div>
         </div>

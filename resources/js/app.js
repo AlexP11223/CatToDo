@@ -4,7 +4,6 @@ function toggleCompletion(taskItem) {
     const chk = taskItem.find('input[type=checkbox]');
     const isChecked = chk.prop('checked');
     const id = taskItem.data('id');
-    console.log(id)
 
     chk.prop('checked', !isChecked);
 
@@ -12,18 +11,28 @@ function toggleCompletion(taskItem) {
 
     if (!isChecked) {
         const dlg = $('#taskCompletedDialog');
-        dlg.modal('show');
+        const dlgImg = dlg.find('.cat-img');
 
-        const dlgCloseCounter = dlg.find('.dialog-close-counter');
-        dlgCloseCounter.text(15);
-        const timer = setInterval(() => {
-            const current = Number.parseInt(dlgCloseCounter.text()) - 1;
-            if (current < 0) {
-                dlg.modal('hide');
-            } else {
-                dlgCloseCounter.text(current);
-            }
-        }, 1000);
+        let timer = null;
+
+        axios.get(route('random_cat')).then(response => {
+            console.log(response);
+            dlgImg.attr('src', response.data.url);
+
+            dlg.find('.dialog-close-counter').show();
+            const dlgCloseCounterValue = dlg.find('.dialog-close-counter-value');
+            dlgCloseCounterValue.text(15);
+            timer = setInterval(() => {
+                const current = Number.parseInt(dlgCloseCounterValue.text()) - 1;
+                if (current < 0) {
+                    dlg.modal('hide');
+                } else {
+                    dlgCloseCounterValue.text(current);
+                }
+            }, 1000);
+        });
+
+        dlg.modal('show');
 
         dlg.on('hide.bs.modal', () => {
             clearInterval(timer);
