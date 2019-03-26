@@ -17,5 +17,6 @@ Route::get('/', 'TaskController@index');
 
 Route::resource('tasks', 'TaskController');
 Route::get('tasks/categories/{categoryName?}', 'TaskController@index')->name('category');
+Route::put('tasks/{task}/completed', 'TaskController@toggle')->name('task_toggle');
 
 Route::get('cats/random', 'CatController@random')->name('random_cat');

@@ -30,7 +30,7 @@ class TaskController extends Controller
 
         // TODO: can be optimized
 
-        $categories = collect([(object) ['name' => 'All', 'tasks' => $user->tasks()]])
+        $categories = collect([(object) ['name' => 'All', 'activeTasks' => $user->activeTasks(), 'completedTasks' => $user->completedTasks()]])
             ->concat($user->taskCategories()->get());
 
         $selectedCategory = $categories->firstWhere('name', $categoryName);
@@ -39,10 +39,12 @@ class TaskController extends Controller
         }
 
         // quick ugly hack
-        $tasks = $selectedCategory instanceof Category ? $selectedCategory->tasks()->get() : $selectedCategory->tasks->get();
+        $activeTasks = $selectedCategory instanceof Category ? $selectedCategory->activeTasks()->get() : $selectedCategory->activeTasks->get();
+        $completedTasks = $selectedCategory instanceof Category ? $selectedCategory->completedTasks()->get() : $selectedCategory->completedTasks->get();
 
         return view('tasks.index', [
-            'tasks' => $tasks,
+            'activeTasks' => $activeTasks,
+            'completedTasks' => $completedTasks,
             'categories' => $categories,
             'selectedCategory' => $selectedCategory]);
     }
@@ -91,6 +93,28 @@ class TaskController extends Controller
             'description' => $request['description']
         ]);
 
+        return redirect()->back();
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param Task $task
+     * @return \Illuminate\Http\Response
+     */
+    public function toggle(Request $request, Task $task)
+    {
+        if ($task->user_id !== Auth::user()->id) {
+            abort(404);
+        }
+
+        $task->update([
+            'completed' => !$task->completed
+        ]);
+
+        if ($request->ajax()) {
+            return response()->json(['status' => 'ok']);
+        }
         return redirect()->back();
     }
 

@@ -15,8 +15,8 @@
                             @foreach($categories as $category)
                                 <a href="{{ route('category', ['categoryName' => $category->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                     {{ $category->name }}
-                                    @if ($category->tasks->count())
-                                        <span class="badge badge-pill">{{ $category->tasks->count() }}</span>
+                                    @if ($category->activeTasks->count())
+                                        <span class="badge badge-pill">{{ $category->activeTasks->count() }}</span>
                                     @endif
                                 </a>
                             @endforeach
@@ -47,57 +47,38 @@
                     <div class="form-group">
                     </div>
                 </form>
-                <div class="todo-list list-group">
-                    @foreach ($tasks as $task)
-                        <a href="#" class="todo-item list-group-item list-group-item-action">
-                            <div class="d-flex align-items-center">
-                                <div class="todo-checkbox align-self-stretch d-flex align-items-center">
-                                    <div class="custom-control-lg custom-control custom-checkbox custom-control-inline">
-                                        <input type="checkbox" class="custom-control-input" id="taskCheckbox{{ $loop->iteration }}">
-                                        <label class="custom-control-label" for="taskCheckbox{{ $loop->iteration }}"></label>
-                                    </div>
-                                </div>
-                                <span class="todo-item-text">{{ $task->description }}</span>
-                                @if ($task->category && $selectedCategory->name === 'All')
-                                    <span class="badge ml-auto">{{ $task->category->name }}</span>
-                                @endif
-                            </div>
-                            <div class="todo-item-form" style="display: none">
-                                <form action="{{action('TaskController@update', ['task' => $task->id])}}" method="post">
-                                    @method('PUT')
-                                    @csrf
-                                    <div class="form-group">
-                                        <div>
-                                            <input type="text" class="form-control" name="description" value="{{ $task->description }}" required>
-                                        </div>
-                                        <div class="row d-flex pt-2">
-                                            <div class="col-md-3 ml-auto">
-                                                <button type="submit" class="btn btn-primary btn-block">
-                                                    {{ __('Save') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form class="pt-4" action="{{action('TaskController@destroy', ['task' => $task->id])}}" method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                    <div class="form-group row d-flex">
-                                        <div class="col-md-3 ml-auto">
-                                            <button type="submit" class="btn btn-danger btn-block">
-                                                {{ __('Delete') }}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+
+                @include('tasks.tasklist', ['tasks' => $activeTasks, 'name' => ''])
+
+                @if ($completedTasks->count())
+                    <button class="btn btn-block btn-success mt-4 mb-2 text-left" id="completedTasksToggler" type="button" data-toggle="collapse" data-target="#completedTasks" aria-expanded="false" aria-controls="completedTasks">
+                        Show {{ $completedTasks->count() }} completed @if ($completedTasks->count() > 1)tasks  @else task @endif
+                    </button>
+
+                    <div class="collapse" id="completedTasks">
+                        @include('tasks.tasklist', ['tasks' => $completedTasks, 'name' => 'completed'])
+                    </div>
+                @endif
             </main>
         </div>
     </div>
 
-    <script>
-    </script>
+    <div class="modal fade" id="taskCompletedDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header pb-2">
+                    <h2 class="modal-title">Good job!</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img class="img-fluid" src="https://cdn2.thecatapi.com/images/MTg4MDU1Ng.jpg" alt="cat image"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Continue (<span class="dialog-close-counter">15</span>)</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

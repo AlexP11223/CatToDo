@@ -123,6 +123,62 @@ class TaskTest extends TestCase
 
     /** @test
      */
+    public function user_can_toggle_task_completion()
+    {
+        $task = $this->user()->activeTasks()->first();
+
+        self::assertFalse((boolean) $task->completed);
+
+        $this
+            ->actingAs($this->user())
+            ->get('/')
+            ->assertOk();
+
+        $this
+            ->put(route('task_toggle', ['task' => $task->id]))
+            ->assertRedirect('/')
+            ->assertSessionHasNoErrors();
+
+        $task->refresh();
+        self::assertTrue((boolean) $task->completed);
+
+        $this
+            ->get('/')
+            ->assertOk();
+
+        $this
+            ->put(route('task_toggle', ['task' => $task->id]))
+            ->assertRedirect('/')
+            ->assertSessionHasNoErrors();
+
+        $task->refresh();
+        self::assertFalse((boolean) $task->completed);
+
+        $this
+            ->get('/')
+            ->assertOk();
+    }
+
+    /** @test
+     */
+    public function user_cannot_toggle_other_user_task_completion()
+    {
+        $task = $this->user()->activeTasks()->first();
+
+        self::assertFalse((boolean) $task->completed);
+
+        $this
+            ->actingAs($this->user2())
+            ->get('/')
+            ->assertOk();
+
+        $this
+            ->put(route('task_toggle', ['task' => $task->id]))
+            ->assertNotFound();
+    }
+
+    /** @test
+     */
     public function user_can_edit_task()
     {
         $this

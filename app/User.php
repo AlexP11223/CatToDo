@@ -70,6 +70,22 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function completedTasks()
+    {
+        return $this->tasks()->where('completed', true);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function activeTasks()
+    {
+        return $this->tasks()->where('completed', false);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function taskCategories()
     {
         return $this->hasMany(Category::class)->orderBy('order');
