@@ -1,3 +1,9 @@
+A simple ToDo app that shows [a random cat image](https://thecatapi.com/) after completing a task.
+
+Implemented using Laravel, Bootstrap.
+
+
+
 # Development setup
 
 For development you can use Homestead virtual machine (via Vagrant) instead of manually installing all needed tools (PHP, web server, NPM, ...).
