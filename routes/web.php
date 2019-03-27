@@ -11,7 +11,7 @@
 |
 */
 
-Auth::routes();
+Auth::routes(['reset' => false]);
 
 Route::get('/', 'TaskController@index');
 
