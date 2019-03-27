@@ -49,10 +49,24 @@ function toggleCompletion(taskItem) {
 $('.todo-checkbox').click(function(e) {
     e.preventDefault();
 
-    toggleCompletion($(this.closest('.todo-item')));
+    toggleCompletion($(this).closest('.todo-item'));
 });
 
-$('.todo-item').click(function (e) {
+const taskItems = $('.todo-item');
+
+taskItems.toArray().forEach(taskItem => {
+    const mc = new Hammer(taskItem);
+    mc.on('swipeleft swiperight', e => {
+        $(taskItem).addClass(e.type);
+
+        setTimeout(() => {
+            $(taskItem).hide();
+            toggleCompletion($(taskItem).closest('.todo-item'));
+        }, 300);
+    });
+});
+
+taskItems.click(function (e) {
     const target = $(e.target);
     if (target.closest('.todo-checkbox').length || target.closest('.todo-item-form').length)
         return;
