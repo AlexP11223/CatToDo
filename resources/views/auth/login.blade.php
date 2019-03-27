@@ -74,6 +74,9 @@
                     </form>
                 </div>
             </div>
+
+
+            <img class="img-fluid mx-auto d-block" style="height: 200px" src="{{ url('img/password.png') }}" alt="user pass123"/>
         </div>
     </div>
 </div>
