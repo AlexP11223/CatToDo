@@ -1,8 +1,12 @@
 A simple ToDo app that shows [a random cat image](https://thecatapi.com/) after completing a task.
 
+http://cattodo.herokuapp.com
+
 Implemented using Laravel, Bootstrap.
 
-http://cattodo.herokuapp.com
+![](https://i.imgur.com/UIeB445.png)
+
+![](https://i.imgur.com/H6o6EPv.png)
 
 # Development setup
 
