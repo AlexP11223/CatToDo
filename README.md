@@ -30,3 +30,23 @@ For development you can use Homestead virtual machine (via Vagrant) instead of m
  9. Open http://cattodo.test in your web browser.
 
 See **Makefile** for other common tasks.
+
+# Heroku deployment
+
+0. Register an account (free), install Heroku CLI, login, etc. https://devcenter.heroku.com/articles/getting-started-with-php
+1. `heroku create`
+2. 
+```
+heroku buildpacks:add heroku/php
+heroku buildpacks:add heroku/nodejs
+```
+3. `heroku addons:create heroku-postgresql:hobby-dev`
+4. 
+```
+php artisan key:generate --show
+heroku config:set APP_KEY = <key generated above>
+```
+5. `heroku config:set LOG_CHANNEL=single`
+6. `heroku config:set CAT_API_KEY=<key from https://thecatapi.com (free)>`
+7. `git push heroku master`
+8. `heroku run php artisan db:seed --force`
