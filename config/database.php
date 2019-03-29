@@ -76,11 +76,11 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => $DATABASE_URL["host"],
-            'port' => $DATABASE_URL["port"],
+            'host' => isset($DATABASE_URL["host"]) ? $DATABASE_URL["host"] : '127.0.0.1',
+            'port' => isset($DATABASE_URL["port"]) ? $DATABASE_URL["port"] : '5432',
             'database' => ltrim($DATABASE_URL["path"], "/"),
-            'username' => $DATABASE_URL["user"],
-            'password' => $DATABASE_URL["pass"],
+            'username' => isset($DATABASE_URL["user"]) ? $DATABASE_URL["user"] : '',
+            'password' => isset($DATABASE_URL["pass"]) ? $DATABASE_URL["pass"] : '',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
