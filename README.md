@@ -4,6 +4,15 @@ http://cattodo.herokuapp.com
 
 Implemented using Laravel, Bootstrap.
 
+Features:
+
+- Shows random cat images when a task is marked as completed. 🐱
+- Responsive UI, works fine on desktops and mobile.
+- Swipe tasks on mobile instead of pressing the checkbox ([hammer.js](http://hammerjs.github.io/)).
+- Categories (no custom categories yet).
+- Add task to a category or without any categories.
+- Update, delete tasks.
+
 ![](https://i.imgur.com/UIeB445.png)
 
 ![](https://i.imgur.com/H6o6EPv.png)
